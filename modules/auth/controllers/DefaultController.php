@@ -31,6 +31,10 @@ class DefaultController extends Controller
     {
         $model = new SignUpForm();
 
+        if (\Yii::$app->request->isPost && $model->load(\Yii::$app->request->post()) && $model->signUp()) {
+            return $this->redirect(['index']);
+        }
+
         return $this->render('signup', ['model' => $model]);
     }
 }
