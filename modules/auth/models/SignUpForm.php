@@ -18,4 +18,13 @@ class SignUpForm extends Model
             ['passwordRepeat', 'compare', 'compareAttribute' => 'password', 'message' => 'Пароли не совпадают'],
         ];
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'email' => 'Email',
+            'password' => 'Пароль',
+            'passwordRepeat' => 'Подтверждение пароля',
+        ];
+    }
 }
