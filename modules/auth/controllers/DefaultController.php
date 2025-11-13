@@ -2,6 +2,7 @@
 
 namespace app\modules\auth\controllers;
 
+use app\modules\auth\models\LoginForm;
 use app\modules\auth\models\SignUpForm;
 use yii\web\Controller;
 
@@ -17,6 +18,13 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    public function actionLogin()
+    {
+        $model = new LoginForm();
+
+        return $this->render('login', ['model' => $model]);
     }
 
     public function actionSignup()
