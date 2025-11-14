@@ -1,22 +1,18 @@
 <?php
 
-namespace app\models;
-
-use Yii;
-use app\modules\auth\models\User;
+namespace app\models\entity;
 
 /**
- * This is the model class for table "subscription".
+ * This is the model class for table "book_author".
  *
  * @property int $id
- * @property int $user_id
+ * @property int $book_id
  * @property int $author_id
- * @property int $created_at
  *
  * @property Author $author
- * @property User $user
+ * @property Book $books
  */
-class Subscription extends \yii\db\ActiveRecord
+class BookAuthor extends \yii\db\ActiveRecord
 {
 
 
@@ -25,7 +21,7 @@ class Subscription extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'subscription';
+        return 'book_author';
     }
 
     /**
@@ -34,10 +30,10 @@ class Subscription extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'author_id', 'created_at'], 'required'],
-            [['user_id', 'author_id', 'created_at'], 'integer'],
-            [['user_id', 'author_id'], 'unique', 'targetAttribute' => ['user_id', 'author_id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['book_id', 'author_id'], 'required'],
+            [['book_id', 'author_id'], 'integer'],
+            [['book_id', 'author_id'], 'unique', 'targetAttribute' => ['book_id', 'author_id']],
+            [['book_id'], 'exist', 'skipOnError' => true, 'targetClass' => Book::class, 'targetAttribute' => ['book_id' => 'id']],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Author::class, 'targetAttribute' => ['author_id' => 'id']],
         ];
     }
@@ -49,9 +45,8 @@ class Subscription extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
+            'book_id' => 'Book ID',
             'author_id' => 'Author ID',
-            'created_at' => 'Created At',
         ];
     }
 
@@ -66,13 +61,13 @@ class Subscription extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[User]].
+     * Gets query for [[Book]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
+    public function getBook()
     {
-        return $this->hasOne(User::class, ['id' => 'user_id']);
+        return $this->hasOne(Book::class, ['id' => 'book_id']);
     }
 
 }

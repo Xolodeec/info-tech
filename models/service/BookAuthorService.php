@@ -1,6 +1,9 @@
 <?php
 
-namespace app\models;
+namespace app\models\service;
+
+use app\models\entity\Book;
+use app\models\entity\BookAuthor;
 
 class BookAuthorService
 {

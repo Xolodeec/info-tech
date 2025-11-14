@@ -1,7 +1,9 @@
 <?php
 
-namespace app\models;
+namespace app\models\form;
 
+use app\models\entity\Author;
+use app\models\entity\Book;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 

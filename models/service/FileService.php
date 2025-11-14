@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\service;
 
 use yii\web\UploadedFile;
 

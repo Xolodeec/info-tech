@@ -1,7 +1,8 @@
 <?php
 
-namespace app\models;
+namespace app\models\service;
 
+use app\models\form\BookForm;
 use Yii;
 
 class BookService

@@ -1,6 +1,8 @@
 <?php
 
-namespace app\models;
+namespace app\models\service;
+
+use app\models\repository\SubscriptionRepository;
 
 class SubscriptionService
 {

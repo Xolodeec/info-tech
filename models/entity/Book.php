@@ -1,11 +1,9 @@
 <?php
 
-namespace app\models;
+namespace app\models\entity;
 
-use Yii;
 use app\modules\auth\models\User;
 use yii\behaviors\TimestampBehavior;
-use yii\db\Expression;
 
 /**
  * This is the model class for table "books".
