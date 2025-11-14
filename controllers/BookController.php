@@ -3,10 +3,15 @@
 namespace app\controllers;
 
 use app\models\Book;
+use app\models\BookAuthorService;
+use app\models\BookForm;
 use app\models\BookSearch;
+use app\models\BookService;
+use app\models\FileService;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * BookController implements the CRUD actions for Book model.
@@ -55,6 +60,8 @@ class BookController extends Controller
      */
     public function actionView($id)
     {
+        $book = $this->findModel($id);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -67,18 +74,26 @@ class BookController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Book();
+        $book = new Book();
+        $form = new BookForm($book);
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+        if (\Yii::$app->request->isPost && $form->load(\Yii::$app->request->post())) {
+            $form->photoFile = UploadedFile::getInstance($form, 'photoFile');
+
+            if ($form->validate()) {
+                $service = new BookService(
+                    new FileService(),
+                    new BookAuthorService(),
+                );
+
+                if ($service->save($form)) {
+                    return $this->redirect(['view', 'id' => $book->id]);
+                }
             }
-        } else {
-            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $form,
         ]);
     }
 
@@ -91,14 +106,26 @@ class BookController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $book = $this->findModel($id);
+        $form = new BookForm($book);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if (\Yii::$app->request->isPost && $form->load(\Yii::$app->request->post())) {
+            $form->photoFile = UploadedFile::getInstance($form, 'photoFile');
+
+            if ($form->validate()) {
+                $service = new BookService(
+                    new FileService(),
+                    new BookAuthorService(),
+                );
+
+                if ($service->save($form)) {
+                    return $this->redirect(['view', 'id' => $book->id]);
+                }
+            }
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $form,
         ]);
     }
 

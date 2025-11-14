@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii\base\Model;
+use yii\helpers\ArrayHelper;
 
 class BookForm extends Model
 {

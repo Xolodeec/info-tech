@@ -33,7 +33,7 @@ class m251113_233657_create_book_author_table extends Migration
             'fk-book_author-book_id',
             '{{%book_author}}',
             'book_id',
-            '{{%book}}',
+            '{{%books}}',
             'id',
             'CASCADE',
             'CASCADE'

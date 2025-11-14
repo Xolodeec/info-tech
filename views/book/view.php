@@ -26,19 +26,62 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'title',
-            'year',
-            'description:ntext',
-            'isbn',
-            'photo',
-            'created_by',
-            'created_at',
-            'updated_at',
-        ],
-    ]) ?>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4">
+                <?= $model->getAttributeLabel('title') ?>
+            </div>
+            <div class="col">
+                <?= $model->title ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <?= $model->getAttributeLabel('year') ?>
+            </div>
+            <div class="col">
+                <?= $model->year ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <?= $model->getAttributeLabel('description') ?>
+            </div>
+            <div class="col">
+                <?= $model->description ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <?= $model->getAttributeLabel('isbn') ?>
+            </div>
+            <div class="col">
+                <?= $model->isbn ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <?= $model->getAttributeLabel('authorIds') ?>
+            </div>
+            <div class="col">
+                <ul>
+                <?php foreach ($model->authors as $author): ?>
+                    <li>
+                        <?= $author->last_name . ' ' . $author->first_name ?>
+                        <?= \yii\bootstrap5\Html::a('[Подписаться на автора]', ['/subscription/toggle', 'authorId' => $author->id]) ?>
+                    </li>
+                <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <?= $model->getAttributeLabel('photo') ?>
+            </div>
+            <div class="col">
+                <img src="<?= $model->photo ?>" class="img-fluid">
+            </div>
+        </div>
+    </div>
 
 </div>

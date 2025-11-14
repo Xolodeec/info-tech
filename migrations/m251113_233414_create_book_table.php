@@ -3,7 +3,7 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%book}}`.
+ * Handles the creation of table `{{%books}}`.
  */
 class m251113_233414_create_book_table extends Migration
 {
@@ -12,7 +12,7 @@ class m251113_233414_create_book_table extends Migration
      */
     public function safeUp()
     {
-        $this->createTable('{{%book}}', [
+        $this->createTable('{{%books}}', [
             'id' => $this->primaryKey(),
             'title' => $this->string(255)->notNull(),
             'year' => $this->smallInteger(4),
@@ -26,15 +26,15 @@ class m251113_233414_create_book_table extends Migration
 
         // Индекс для 'created_by'
         $this->createIndex(
-            'idx-book-created_by',
-            '{{%book}}',
+            'idx-books-created_by',
+            '{{%books}}',
             'created_by'
         );
 
-        // Внешний ключ: book.created_by -> user.id
+        // Внешний ключ: books.created_by -> user.id
         $this->addForeignKey(
-            'fk-book-created_by',
-            '{{%book}}',
+            'fk-books-created_by',
+            '{{%books}}',
             'created_by',
             '{{%user}}',
             'id',
@@ -43,8 +43,8 @@ class m251113_233414_create_book_table extends Migration
         );
 
         // Индексы для отчета (по году) и поиска (по названию)
-        $this->createIndex('idx-book-year', '{{%book}}', 'year');
-        $this->createIndex('idx-book-title', '{{%book}}', 'title');
+        $this->createIndex('idx-books-year', '{{%books}}', 'year');
+        $this->createIndex('idx-books-title', '{{%books}}', 'title');
     }
 
     /**
@@ -52,11 +52,11 @@ class m251113_233414_create_book_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('fk-book-created_by', '{{%book}}');
-        $this->dropIndex('idx-book-created_by', '{{%book}}');
-        $this->dropIndex('idx-book-year', '{{%book}}');
-        $this->dropIndex('idx-book-title', '{{%book}}');
+        $this->dropForeignKey('fk-books-created_by', '{{%books}}');
+        $this->dropIndex('idx-books-created_by', '{{%books}}');
+        $this->dropIndex('idx-books-year', '{{%books}}');
+        $this->dropIndex('idx-books-title', '{{%books}}');
 
-        $this->dropTable('{{%book}}');
+        $this->dropTable('{{%books}}');
     }
 }
