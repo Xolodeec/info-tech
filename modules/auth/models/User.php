@@ -37,9 +37,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      * @param $email
      * @return User|null
      */
-    public static function findByEmail($email)
+    public static function findByPhone($phone)
     {
-        return static::findOne(['email' => $email, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['phone' => $phone, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**

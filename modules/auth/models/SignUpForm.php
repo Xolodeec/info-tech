@@ -14,17 +14,16 @@ class SignUpForm extends Model
     public function rules()
     {
         return [
-            [['email', 'password', 'passwordRepeat'], 'required', 'message' => '{attribute} не может быть пустым'],
-            ['email', 'email'],
+            [['phone', 'password', 'passwordRepeat'], 'required', 'message' => '{attribute} не может быть пустым'],
             ['passwordRepeat', 'compare', 'compareAttribute' => 'password', 'message' => 'Пароли не совпадают'],
-            ['email', 'unique', 'targetClass' => User::class, 'message' => 'Этот email уже занят.'],
+            ['phone', 'unique', 'targetClass' => User::class, 'message' => 'Этот phone уже занят.'],
         ];
     }
 
     public function attributeLabels()
     {
         return [
-            'email' => 'Email',
+            'phone' => 'phone',
             'password' => 'Пароль',
             'passwordRepeat' => 'Подтверждение пароля',
         ];

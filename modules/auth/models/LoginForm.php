@@ -15,8 +15,7 @@ class LoginForm extends Model
     public function rules()
     {
         return [
-            [['email', 'password'], 'required', 'message' => '{attribute} не может быть пустым'],
-            ['email', 'email'],
+            [['phone', 'password'], 'required', 'message' => '{attribute} не может быть пустым'],
             ['password', 'validatePassword'],
         ];
     }

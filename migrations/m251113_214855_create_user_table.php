@@ -14,7 +14,7 @@ class m251113_214855_create_user_table extends Migration
     {
         $this->createTable('{{%user}}', [
             'id' => $this->primaryKey(),
-            'email' => $this->string()->notNull()->unique(),
+            'phone' => $this->string(20)->notNull()->unique(),
             'password_hash' => $this->string()->notNull(),
             'auth_key' => $this->string(32)->notNull(),
             'status' => $this->smallInteger()->notNull()->defaultValue(10),
@@ -23,11 +23,11 @@ class m251113_214855_create_user_table extends Migration
         ]);
 
         // Индексы для оптимизации
-        $this->createIndex('idx-user-email', '{{%user}}', 'email');
+        $this->createIndex('idx-user-phone', '{{%user}}', 'phone');
         $this->createIndex('idx-user-status', '{{%user}}', 'status');
 
         // Составной индекс для частых запросов по email и статусу
-        $this->createIndex('idx-user-email-status', '{{%user}}', ['email', 'status']);
+        $this->createIndex('idx-user-email-status', '{{%user}}', ['phone', 'status']);
     }
 
     /**
