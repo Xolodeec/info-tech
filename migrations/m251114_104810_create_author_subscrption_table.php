@@ -45,6 +45,6 @@ class m251114_104810_create_author_subscrption_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%author_subscrption}}');
+        $this->dropTable('{{%subscription}}');
     }
 }
