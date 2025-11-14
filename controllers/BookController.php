@@ -2,15 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Book;
-use app\models\BookAuthorService;
-use app\models\BookForm;
-use app\models\BookSearch;
-use app\models\BookService;
-use app\models\FileService;
+use app\models\entity\Book;
+use app\models\form\BookForm;
+use app\models\search\BookSearch;
+use app\models\service\BookAuthorService;
+use app\models\service\BookReportService;
+use app\models\service\BookService;
+use app\models\service\FileService;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 
 /**
@@ -157,5 +158,12 @@ class BookController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionReportTopAuthor()
+    {
+        $service = new BookReportService();
+
+        return $this->render('report-top-author', ['data' => $service->getTopAuthorsByYear(2025)]);
     }
 }

@@ -2,9 +2,8 @@
 
 namespace app\controllers;
 
-use app\models\Subscription;
-use app\models\SubscriptionRepository;
-use app\models\SubscriptionService;
+use app\models\repository\SubscriptionRepository;
+use app\models\service\SubscriptionService;
 use yii\web\Controller;
 
 class SubscriptionController extends Controller

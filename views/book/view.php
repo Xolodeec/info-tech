@@ -1,10 +1,9 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var app\models\Book $model */
+/** @var \app\models\entity\Book $model */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Books', 'url' => ['index']];
@@ -15,6 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?php if (!\Yii::$app->user->isGuest): ?>
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+    <?php endif; ?>
 
     <div class="container-fluid">
         <div class="row">
@@ -68,7 +69,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php foreach ($model->authors as $author): ?>
                     <li>
                         <?= $author->last_name . ' ' . $author->first_name ?>
+
+                        <?php if (!\Yii::$app->user->isGuest): ?>
                         <?= \yii\bootstrap5\Html::a('[Подписаться на автора]', ['/subscription/toggle', 'authorId' => $author->id]) ?>
+                        <?php endif; ?>
+
                     </li>
                 <?php endforeach; ?>
                 </ul>

@@ -51,9 +51,10 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '/' => 'book/index',
+                '/auth/<action>' => '/auth/default/<action>',
             ],
         ],
-
     ],
     'params' => $params,
 ];

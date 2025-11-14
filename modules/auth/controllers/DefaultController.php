@@ -5,6 +5,7 @@ namespace app\modules\auth\controllers;
 use app\modules\auth\models\LoginForm;
 use app\modules\auth\models\SignUpForm;
 use yii\web\Controller;
+use yii\web\Response;
 
 /**
  * Default controller for the `auth` module
@@ -40,5 +41,17 @@ class DefaultController extends Controller
         }
 
         return $this->render('signup', ['model' => $model]);
+    }
+
+    /**
+     * Logout action.
+     *
+     * @return Response
+     */
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+
+        return $this->goHome();
     }
 }
