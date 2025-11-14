@@ -12,7 +12,7 @@ use Yii;
  * @property int $author_id
  *
  * @property Author $author
- * @property Book $book
+ * @property Book $books
  */
 class BookAuthor extends \yii\db\ActiveRecord
 {

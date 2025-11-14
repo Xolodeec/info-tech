@@ -3,9 +3,12 @@
 namespace app\models;
 
 use Yii;
+use app\modules\auth\models\User;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 
 /**
- * This is the model class for table "book".
+ * This is the model class for table "books".
  *
  * @property int $id
  * @property string $title
@@ -24,13 +27,24 @@ use Yii;
 class Book extends \yii\db\ActiveRecord
 {
 
-
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
         return 'book';
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => time(),
+            ],
+        ];
     }
 
     /**
@@ -40,7 +54,7 @@ class Book extends \yii\db\ActiveRecord
     {
         return [
             [['year', 'description', 'isbn', 'photo', 'created_by'], 'default', 'value' => null],
-            [['title', 'created_at', 'updated_at'], 'required'],
+            [['title'], 'required'],
             [['year', 'created_by', 'created_at', 'updated_at'], 'integer'],
             [['description'], 'string'],
             [['title', 'photo'], 'string', 'max' => 255],
