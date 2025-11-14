@@ -9,6 +9,7 @@ use app\models\service\BookAuthorService;
 use app\models\service\BookReportService;
 use app\models\service\BookService;
 use app\models\service\FileService;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -27,6 +28,32 @@ class BookController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['index', 'view', 'report-top-author'],
+                            'roles' => ['?', '@'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['@'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['update', 'delete'],
+                            'roles' => ['@'],
+                            'matchCallback' => function ($rule, $action) {
+                                // Проверяем, является ли пользователь владельцем книги
+                                $id = \Yii::$app->request->get('id');
+                                $book = Book::findOne($id);
+                                return $book && ($book->created_by == \Yii::$app->user->id || \Yii::$app->user->can('admin'));
+                            }
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [

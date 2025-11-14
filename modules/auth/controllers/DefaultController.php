@@ -26,7 +26,7 @@ class DefaultController extends Controller
         $model = new LoginForm();
 
         if (\Yii::$app->request->isPost && $model->load(\Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['/']);
         }
 
         return $this->render('login', ['model' => $model]);
@@ -37,7 +37,7 @@ class DefaultController extends Controller
         $model = new SignUpForm();
 
         if (\Yii::$app->request->isPost && $model->load(\Yii::$app->request->post()) && $model->signUp()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['/']);
         }
 
         return $this->render('signup', ['model' => $model]);
@@ -50,8 +50,8 @@ class DefaultController extends Controller
      */
     public function actionLogout()
     {
-        Yii::$app->user->logout();
+        \Yii::$app->user->logout();
 
-        return $this->goHome();
+        return $this->redirect(['/']);
     }
 }
