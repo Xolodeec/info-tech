@@ -6,7 +6,16 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        function () {
+            \yii\base\Event::on(
+                \app\models\entity\BookAuthor::class,
+                \yii\db\ActiveRecord::EVENT_AFTER_INSERT,
+                [\app\components\SmsNotificationHandler::class, 'handleNewBook']
+            );
+        },
+    ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -31,6 +40,7 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+
         'mailer' => [
             'class' => \yii\symfonymailer\Mailer::class,
             'viewPath' => '@app/mail',
@@ -54,6 +64,10 @@ $config = [
                 '/' => 'book/index',
                 '/auth/<action>' => '/auth/default/<action>',
             ],
+        ],
+        'smsPilot' => [
+            'class' => 'app\components\SmsPilotClient',
+            'apiKey' => 'XXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZXXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZ',
         ],
     ],
     'params' => $params,
