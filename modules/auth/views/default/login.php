@@ -13,7 +13,7 @@ $this->title = 'Авторизация';
 
 <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-<?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
+<?= $form->field($model, 'phone')->textInput(['autofocus' => true]) ?>
 <?= $form->field($model, 'password')->passwordInput() ?>
 
 <?= Html::submitButton('Войти', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>

@@ -7,7 +7,7 @@ use yii\base\Model;
 
 class SignUpForm extends Model
 {
-    public $email;
+    public $phone;
     public $password;
     public $passwordRepeat;
 
@@ -23,7 +23,7 @@ class SignUpForm extends Model
     public function attributeLabels()
     {
         return [
-            'phone' => 'phone',
+            'phone' => 'Телефон',
             'password' => 'Пароль',
             'passwordRepeat' => 'Подтверждение пароля',
         ];
@@ -34,7 +34,7 @@ class SignUpForm extends Model
         if ($this->validate()) {
 
             $user = new User();
-            $user->email = $this->email;
+            $user->phone = $this->phone;
             $user->setPassword($this->password);
 
             if ($user->save()) {

@@ -7,7 +7,7 @@ use yii\base\Model;
 
 class LoginForm extends Model
 {
-    public $email;
+    public $phone;
     public $password;
 
     private $_user = false;
@@ -23,7 +23,7 @@ class LoginForm extends Model
     public function getUser()
     {
         if (!$this->_user) {
-            $this->_user = User::findByEmail($this->email);
+            $this->_user = User::findByPhone($this->phone);
         }
 
         return $this->_user;
